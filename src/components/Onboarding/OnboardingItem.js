@@ -2,6 +2,7 @@ import {StyleSheet, Text, View, Image, useWindowDimensions} from 'react-native';
 import React from 'react';
 import { scale } from '../../assets/helper/scaling';
 import { CNeutral12, CTextLight6 } from '../../assets/styles/colors';
+import font from '../../assets/styles/font';
 
 export default function OnboardingItem({item}) {
   const {width} = useWindowDimensions();
@@ -12,8 +13,8 @@ export default function OnboardingItem({item}) {
         style={[styles.image, {width, resizeMode: 'contain'}]}
       />
       <View style={{flex: 0.2}}>
-        <Text style={[styles.title,{width: width > 400 ? scale(340): scale(350)}]}>{item.title}</Text>
-        <Text style={styles.description}>{item.desc}</Text>
+        <Text style={[styles.title,font.PoppinsRegular,{width: width > 400 ? scale(340): scale(350)}]}>{item.title}</Text>
+        <Text style={[styles.description,font.PoppinsRegular]}>{item.desc}</Text>
       </View>
     </View>
   );
@@ -41,8 +42,8 @@ const styles = StyleSheet.create({
     fontSize:24,
   },
   description: {
-    fontWeight: '300',
-    color: CTextLight6,
+    fontWeight: '400',
+    color: '#707070',
     textAlign: 'center',
     paddingHorizontal: 64,
   },

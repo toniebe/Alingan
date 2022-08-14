@@ -6,6 +6,9 @@ const font = StyleSheet.create({
     },
     PoppinsBold:{
         fontFamily:'Poppins-Bold'
+    },
+    PoppinsRegular:{
+        fontFamily:'Poppins-Regular'
     }
 })
 
