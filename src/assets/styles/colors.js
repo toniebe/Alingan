@@ -37,8 +37,24 @@ const CTextDark5 = '#7D7D7D';
 const CTextDark6 = '#ACACAC';
 const CTextDark7 = '#DBDBDB';
 
-// Primary
+// Main color in Alingan
+
 const CPrimary = '#D2512C';
+const CSecondary = '#173A64';
+const CGreen = '#00A441';
+const CRed = '#AD2A2A';
+const CBlue = '#1481D2';
+const CBlack = '#000000';
+const CWhite = '#FFFFFF';
+
+// grey color in Alingan;
+
+const CGreey = '#F8F8F8';
+const CGreey1 = '#F3F5F8';
+const CGreey2 = '#BBBBBB';
+const CGreey3 = '#707070';
+const CGreey4 = '#EEEEEE';
+const CGreey5 = '#CCCCCC';
 
 const colors = StyleSheet.create({
   Neutral: {
@@ -131,6 +147,24 @@ const colors = StyleSheet.create({
   Primary: {
     color: CPrimary,
   },
+  Secondary: {
+    color: CSecondary,
+  },
+  Green: {
+    color: CGreen,
+  },
+  Red: {
+    color: CRed,
+  },
+  Blue: {
+    color: CBlue,
+  },
+  Black: {
+    color: CBlack,
+  },
+  White: {
+    color: CWhite,
+  },
 });
 
 export {
@@ -165,4 +199,16 @@ export {
   CTextDark6,
   CTextDark7,
   colors,
+  CSecondary,
+  CGreen,
+  CRed,
+  CBlue,
+  CBlack,
+  CWhite,
+  CGreey,
+  CGreey1,
+  CGreey2,
+  CGreey3,
+  CGreey4,
+  CGreey5,
 };
