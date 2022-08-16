@@ -1,5 +1,5 @@
 import {Linking, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import StatusBarBackground from '../../components/StatusBarBackground';
 import font from '../../assets/styles/font';
 import {CBlack, colors, CPrimary, CWhite} from '../../assets/styles/colors';
@@ -7,8 +7,32 @@ import TextInputs from '../../assets/components/TextInputs';
 import iconEmail from '../../assets/images/icon/Exclude.png';
 import {scale} from '../../assets/helper/scaling';
 import Button from '../../assets/components/Button';
+import callAPI from '../../assets/config/callAPI';
+import login from '../../api/login';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function LoginScreen() {
+export default function LoginScreen({navigation}) {
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+
+  const handleSubmit = async () => {
+    let response = await login({email,password})
+    if(!response.error){
+      // console.log(response.data.payload)
+      await storeData(response.data.payload)
+      navigation.navigate('Dashboard')
+    }
+  }
+
+  const storeData = async (value) => {
+    try{
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('user',jsonValue)
+    }catch(e){
+      console.log({e})
+    }
+  }
+  
   return (
     <View style={styles.container}>
       <StatusBarBackground style={{backgroundColor: CPrimary}} />
@@ -28,18 +52,20 @@ export default function LoginScreen() {
           </Text>
         </View>
         <View style={styles.textinputContainer}>
-          <TextInputs icon={require('../../assets/images/icon/Exclude.png')} />
+          <TextInputs value={email} onChangeText={(value) => setEmail(value)}  icon={require('../../assets/images/icon/Exclude.png')} />
         </View>
         <View style={styles.textinputContainer}>
           <TextInputs
             icon={require('../../assets/images/icon/Exclude.png')}
             password
             secureTextEntry
+            value={password}
+            onChangeText={(value) => setPassword(value)}
           />
         </View>
       </View>
       <View style={styles.buttonContainer}>
-        <Button title={'LOGIN'} />
+        <Button title={'LOGIN'} onPress={() => handleSubmit()} disable={!email || !password} />
         <View style={styles.registerContainer}>
           <Text
             style={[

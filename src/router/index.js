@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import Auth from './Auth';
+import Home from './Home';
 import {
   createStackNavigator,
   TransitionPreset,
@@ -12,9 +13,10 @@ export default function Router() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>{Auth()}</Stack.Navigator>
+      <Stack.Navigator>
+        {Auth()}
+        {Home()}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-
