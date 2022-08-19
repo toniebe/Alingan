@@ -13,7 +13,8 @@ export default function Button({
   size = 'long', // (short/long)
   isLoading, // (true/false)
   category = 'standard', // (standart/circle/square)
-  style
+  style,
+  textStyle
 }) {
   category = category && category.toLowerCase();
   size = size && size.toLowerCase()
@@ -29,6 +30,7 @@ export default function Button({
         type={type}
         title={title}
         style={style}
+        textStyle={textStyle}
       />
     ) : (
       <BStandartLong
@@ -38,6 +40,7 @@ export default function Button({
         type={type}
         title={title}
         style={style}
+        textStyle={textStyle}
       />
     )
   ) : (

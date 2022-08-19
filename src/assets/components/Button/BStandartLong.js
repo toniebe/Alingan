@@ -12,7 +12,15 @@ import {
   CTextLight,
 } from '../../styles/colors';
 
-const BStandartLong = ({disable, onPress, icon, type, title, style}) => {
+const BStandartLong = ({
+  disable,
+  onPress,
+  icon,
+  type,
+  title,
+  style,
+  textStyle,
+}) => {
   return disable ? (
     <View
       style={[
@@ -33,6 +41,7 @@ const BStandartLong = ({disable, onPress, icon, type, title, style}) => {
           font.PoppinsRegular,
           colors.TextLight4,
           {textAlign: 'center', fontWeight: '600'},
+          textStyle
         ]}>
         {title}
       </Text>
@@ -58,6 +67,7 @@ const BStandartLong = ({disable, onPress, icon, type, title, style}) => {
           colors.TextLight1,
           font.PoppinsRegular,
           {textAlign: 'center', fontWeight: '600'},
+          textStyle
         ]}>
         {title}
       </Text>
@@ -88,6 +98,7 @@ const BStandartLong = ({disable, onPress, icon, type, title, style}) => {
             colors.Primary,
             font.PoppinsRegular,
             {textAlign: 'center', fontWeight: '600'},
+            textStyle,
           ]}>
           {title}
         </Text>
