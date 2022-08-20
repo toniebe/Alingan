@@ -14,6 +14,7 @@ import {
 import Button from '../../assets/components/Button';
 import font from '../../assets/styles/font';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Loading from '../../assets/components/Loading';
 
 export default function AccountScreen({navigation}) {
   const [user, setUser] = useState({});
@@ -43,9 +44,7 @@ export default function AccountScreen({navigation}) {
   return (
     <View style={styles.container}>
       {isLoading ? (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <ActivityIndicator size={'large'} color={CPrimary} />
-        </View>
+        <Loading  />
       ) : (
         <>
           <View style={styles.topContainer}>

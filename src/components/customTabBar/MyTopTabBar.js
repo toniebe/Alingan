@@ -1,27 +1,14 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
-import {scale} from '../assets/helper/scaling';
-import {CPrimary} from '../assets/styles/colors';
-import font from '../assets/styles/font';
+import {Animated, View, TouchableOpacity} from 'react-native';
+import { CNeutral } from '../../assets/styles/colors';
 
-export default function MyTabBar({state, descriptors, navigation}) {
+export default function MyTopTabBar({
+  state,
+  descriptors,
+  navigation,
+  position,
+}) {
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        backgroundColor: 'white',
-        paddingVertical: scale(15),
-        // borderTopWidth: 1,
-        // borderTopColor: 'grey',
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 3,
-        },
-        shadowOpacity: 0.27,
-        shadowRadius: 4.65,
-
-        elevation: 6,
-      }}>
+    <View style={{flexDirection: 'row',backgroundColor:CNeutral}}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
         const label =
@@ -30,8 +17,6 @@ export default function MyTabBar({state, descriptors, navigation}) {
             : options.title !== undefined
             ? options.title
             : route.name;
-
-        const icon = options.tabBarIcon;
 
         const isFocused = state.index === index;
 
@@ -55,25 +40,23 @@ export default function MyTabBar({state, descriptors, navigation}) {
           });
         };
 
+        const inputRange = state.routes.map((_, i) => i);
+        const opacity = position.interpolate({
+          inputRange,
+          outputRange: inputRange.map(i => (i === index ? 1 : 0)),
+        });
+
         return (
           <TouchableOpacity
+            key={index}
             accessibilityRole="button"
             accessibilityState={isFocused ? {selected: true} : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
             onPress={onPress}
-            key={index}
             onLongPress={onLongPress}
-            style={{flex: 1, alignItems: 'center'}}>
-            <Image
-              source={icon}
-              style={{
-                width: scale(20),
-                height: scale(20),
-                tintColor: isFocused ? CPrimary : 'grey',
-              }}
-            />
-            <Text style={[font.Poppins,{color: isFocused ? CPrimary : 'grey'}]}>{label}</Text>
+            style={{flex: 1}}>
+            <Animated.Text style={{opacity}}>{label}</Animated.Text>
           </TouchableOpacity>
         );
       })}
