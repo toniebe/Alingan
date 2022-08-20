@@ -16,7 +16,7 @@ import moment from 'moment';
 import formatDate from '../../assets/helper/formatDate';
 import transactionStore from '../../api/transactionStore';
 
-export default function StoreScreen() {
+export default function StoreScreen({navigation}) {
   const [transaction, setTransaction] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   //   const [filterDate,setFilterDate] = useState([])
@@ -42,7 +42,12 @@ export default function StoreScreen() {
       ) : (
         <ScrollView style={styles.cardContainer}>
           {transaction.map((item, index) => (
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('TransactionDetail', {
+                  id: item.transactionId,
+                })
+              }>
               <CardTransaction
                 number={item.transactionTotal}
                 idTransaksi={moment(item.transactionDate, 'YYYY/MM/DD').format(

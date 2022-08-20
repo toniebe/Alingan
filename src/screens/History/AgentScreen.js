@@ -13,12 +13,12 @@ import {scale} from '../../assets/helper/scaling';
 import {useTheme} from '@react-navigation/native';
 import Loading from '../../assets/components/Loading';
 import moment from 'moment';
-import formatDate from '../../assets/helper/formatDate'
+import formatDate from '../../assets/helper/formatDate';
 
 export default function AgentScreen({navigation}) {
   const [transaction, setTransaction] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-//   const [filterDate,setFilterDate] = useState([])
+  //   const [filterDate,setFilterDate] = useState([])
 
   const getDataTransaction = async () => {
     setIsLoading(true);
@@ -30,24 +30,31 @@ export default function AgentScreen({navigation}) {
     }
   };
 
-
   useEffect(() => {
     getDataTransaction();
   }, []);
 
   return (
-    <View style={{flex:1}}>
+    <View style={{flex: 1}}>
       {isLoading ? (
         <Loading />
       ) : (
         <ScrollView style={styles.cardContainer}>
-          {
-            transaction.map((item,index) => (
-                <TouchableOpacity>
-                    <CardTransaction number={item.transactionTotal} idTransaksi={moment(item.transactionDate,'YYYY/MM/DD').format('YYYY-MM-DD')} />
-                </TouchableOpacity>
-            ))
-          }
+          {transaction.map((item, index) => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('TransactionDetail', {
+                  id: item.transactionId,
+                })
+              }>
+              <CardTransaction
+                number={item.transactionTotal}
+                idTransaksi={moment(item.transactionDate, 'YYYY/MM/DD').format(
+                  'YYYY-MM-DD',
+                )}
+              />
+            </TouchableOpacity>
+          ))}
         </ScrollView>
       )}
     </View>

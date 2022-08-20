@@ -7,6 +7,7 @@ import {
   TransitionPreset,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
+import Transaction from './Transaction';
 
 export default function Router() {
   const Stack = createStackNavigator();
@@ -16,6 +17,7 @@ export default function Router() {
       <Stack.Navigator>
         {Auth()}
         {Home()}
+        {Transaction()}
       </Stack.Navigator>
     </NavigationContainer>
   );
