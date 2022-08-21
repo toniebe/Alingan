@@ -3,6 +3,7 @@ import React from 'react';
 import {CPrimary} from '../../styles/colors';
 import BStandartShort from './BStandartShort';
 import BStandartLong from './BStandartLong';
+import BCircle from './BCircle';
 
 export default function Button({
   disable, // (true/false)
@@ -14,14 +15,14 @@ export default function Button({
   isLoading, // (true/false)
   category = 'standard', // (standart/circle/square)
   style,
-  textStyle
+  textStyle,
 }) {
   category = category && category.toLowerCase();
-  size = size && size.toLowerCase()
+  size = size && size.toLowerCase();
   type = type && type.toLowerCase();
   return isLoading ? (
     <ActivityIndicator size="large" color={CPrimary} />
-  ) : category && 'standard' ? (
+  ) : category === 'standard' ? (
     size === 'short' ? (
       <BStandartShort
         disable={disable}
@@ -43,14 +44,23 @@ export default function Button({
         textStyle={textStyle}
       />
     )
-  ) : (
-    <BStandartLong 
-        disable={disable}
-        onPress={onPress}
-        icon={icon}
-        type={type}
-        title={title}
-        style={style}
+  ) : category === 'circle' ? (
+    <BCircle
+      disable={disable}
+      onPress={onPress}
+      icon={icon}
+      type={type}
+      title={title}
+      style={style}
     />
-  )
+  ) : (
+    <BStandartLong
+      disable={disable}
+      onPress={onPress}
+      icon={icon}
+      type={type}
+      title={title}
+      style={style}
+    />
+  );
 }
