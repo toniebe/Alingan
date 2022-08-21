@@ -1,6 +1,6 @@
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {scale} from '../../assets/helper/scaling';
-import {CPrimary} from '../../assets/styles/colors';
+import {CPrimary, CWhite} from '../../assets/styles/colors';
 import font from '../../assets/styles/font';
 
 export default function MyTabBar({state, descriptors, navigation}) {
@@ -8,14 +8,12 @@ export default function MyTabBar({state, descriptors, navigation}) {
     <View
       style={{
         flexDirection: 'row',
-        backgroundColor: 'white',
+        backgroundColor: CWhite,
         paddingVertical: scale(15),
-        // borderTopWidth: 1,
-        // borderTopColor: 'grey',
         shadowColor: '#000',
         shadowOffset: {
           width: 0,
-          height: 3,
+          height: -3,
         },
         shadowOpacity: 0.27,
         shadowRadius: 4.65,

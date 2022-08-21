@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
     paddingBottom: scale(10),
   },
   image: {
-    width: scale(80),
-    height: scale(92),
+    width: scale(70),
+    height: scale(70),
     resizeMode: 'contain',
     borderRadius: scale(10),
   },

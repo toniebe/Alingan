@@ -10,6 +10,7 @@ import Divider from '../../assets/components/Divider';
 import CardProduct from '../../components/Transaction/CardProduct';
 import getProduct from '../../api/getProduct';
 import Loading from '../../assets/components/Loading';
+import Button from '../../assets/components/Button';
 
 export default function TransactionScreen({navigation}) {
   const [allData, setAllData] = useState({});
@@ -19,10 +20,10 @@ export default function TransactionScreen({navigation}) {
   const [filterData, setFilterData] = useState([]);
   const [cart, setCart] = useState([]);
   const [search, setSearch] = useState('');
+  const [tabCart, setTabCart] = useState(false);
 
   const getData = async () => {
     setIsLoading(true);
-    let newArr = [];
     let response = await getProduct();
     if (!response.error) {
       setAllData(response.data.payload);
@@ -34,17 +35,21 @@ export default function TransactionScreen({navigation}) {
 
   const quantityHanlder = (action, index) => {
     const newItems = [...product]; // clone the array
-    // console.log({newItems})
     let currentQty = newItems[index]['quantity'];
 
     if (action == 'more') {
       newItems[index]['quantity'] = currentQty + 1;
+      setTabCart(true)
     } else if (action == 'less') {
       newItems[index]['quantity'] = currentQty > 0 ? currentQty - 1 : 0;
+      currentQty > 0 ? setTabCart(true) : setTabCart(false)
+
     }
-    setNewItem({cartItems: newItems});
-    console.log(newItem);
+
+    setProduct(newItems);
+    console.log('ini cart: ', product);
   };
+
 
   const searchFilter = text => {
     if (text) {
@@ -65,6 +70,7 @@ export default function TransactionScreen({navigation}) {
 
   useEffect(() => {
     getData();
+    // handleCart()
   }, []);
 
   return (
@@ -79,12 +85,17 @@ export default function TransactionScreen({navigation}) {
           <View style={styles.midContainer}>
             <CardAccount />
             <View style={{marginVertical: scale(20), borderRadius: scale(10)}}>
-              <TextInputs value={search} onChangeText={(value) => searchFilter(value)} icon={iconSearch} placeholder="Cari Produk" />
+              <TextInputs
+                value={search}
+                onChangeText={value => searchFilter(value)}
+                icon={iconSearch}
+                placeholder="Cari Produk"
+              />
             </View>
             <Divider type={'normal'} />
             <ScrollView
               contentContainerStyle={styles.contentContainer}
-              style={{flex: 1, marginVertical: scale(20)}}>
+              style={{flex: 1, marginTop: scale(10)}}>
               {filterData.map((item, index) => (
                 <View style={{marginVertical: scale(10)}} key={index}>
                   <CardProduct
@@ -100,6 +111,17 @@ export default function TransactionScreen({navigation}) {
                 </View>
               ))}
             </ScrollView>
+            {tabCart && (
+              <View style={styles.cart}>
+                <View>
+                  <Text>Total 3 Produk</Text>
+                  <Text>Rp49.000</Text>
+                </View>
+                <View style={{width: '70%', alignItems: 'flex-end'}}>
+                  <Button size="short" title={'Bayar Sekarang'} />
+                </View>
+              </View>
+            )}
           </View>
         </>
       )}
@@ -128,6 +150,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: CWhite,
     paddingHorizontal: scale(20),
+  },
+  cart: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: -3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+
+    elevation: 6,
   },
 });
 

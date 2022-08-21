@@ -112,9 +112,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: scale(4),
+    paddingHorizontal:scale(5)
   },
   size: {
-    width: '40%',
+    width: '60%',
     minWidth: scale(100),
     height: scale(45),
   },

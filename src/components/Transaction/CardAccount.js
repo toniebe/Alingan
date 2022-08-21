@@ -36,7 +36,7 @@ export default function CardAccount({
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical:scale(15),
+    paddingVertical:scale(10),
     paddingHorizontal:scale(20),
     marginTop:scale(-30),
     flexDirection: 'row',
