@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
   textinput: {
     paddingHorizontal: scale(10),
     width: '100%',
+    height:scale(35)
     // backgroundColor: 'pink',
   },
   texinputContainer: {

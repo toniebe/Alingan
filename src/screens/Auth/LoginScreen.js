@@ -19,6 +19,7 @@ import login from '../../api/login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import iconEmail from '../../assets/images/icon/email.png'
 import iconPassword from '../../assets/images/icon/lock.png'
+import {REGISTER_URL} from 'dotenv'
 
 export default function LoginScreen({navigation}) {
   const [email, setEmail] = useState('');
@@ -28,13 +29,15 @@ export default function LoginScreen({navigation}) {
   const handleSubmit = async () => {
     setIsLoading(true);
     let response = await login({email, password});
+    console.log({response})
     if (!response.error) {
       // console.log(response.data.payload)
       await storeData(response.data.payload);
       navigation.navigate('Dashboard');
       setIsLoading(false);
     } else {
-      isLoading(false);
+      console.log('masuk sini')
+      setIsLoading(false);
     }
   };
 
@@ -49,7 +52,7 @@ export default function LoginScreen({navigation}) {
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <StatusBarBackground style={{backgroundColor: CPrimary}} />
+      {/* <StatusBarBackground style={{backgroundColor: CPrimary}} /> */}
       <View style={styles.titleContainer}>
         <Text style={[font.PoppinsBold, colors.Primary, {fontSize: scale(50)}]}>
           ALINGAN
@@ -99,7 +102,7 @@ export default function LoginScreen({navigation}) {
             Belum punya akun
           </Text>
           <TouchableOpacity
-            onPress={() => Linking.openURL('https://www.facebook.com')}>
+            onPress={() => Linking.openURL(REGISTER_URL)}>
             <Text
               style={[
                 font.PoppinsBold,

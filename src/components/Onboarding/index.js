@@ -6,6 +6,7 @@ import font from '../../assets/styles/font';
 import {colors} from '../../assets/styles/colors';
 import {scale} from '../../assets/helper/scaling';
 import Button from '../../assets/components/Button';
+import {REGISTER_URL} from 'dotenv'
 
 export default function Onboarding({data, navigation}) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -73,7 +74,7 @@ export default function Onboarding({data, navigation}) {
           category="standard"
           size="long"
           type="secondary"
-          onPress={() => Linking.openURL('https://www.facebook.com')}
+          onPress={() => Linking.openURL(REGISTER_URL)}
         />
       </View>
     </View>

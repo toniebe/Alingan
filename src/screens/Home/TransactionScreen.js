@@ -33,21 +33,25 @@ export default function TransactionScreen({navigation}) {
     }
   };
 
+  const getCartProduct = () => {
+    product.filter((item) => item.quantity !== 0).map((item,index) => (
+      setCart([...cart,item])
+    ))
+    console.log({cart})
+  }
+
   const quantityHanlder = (action, index) => {
     const newItems = [...product]; // clone the array
     let currentQty = newItems[index]['quantity'];
 
     if (action == 'more') {
       newItems[index]['quantity'] = currentQty + 1;
-      setTabCart(true)
     } else if (action == 'less') {
       newItems[index]['quantity'] = currentQty > 0 ? currentQty - 1 : 0;
-      currentQty > 0 ? setTabCart(true) : setTabCart(false)
-
     }
 
     setProduct(newItems);
-    console.log('ini cart: ', product);
+    // getCartProduct();
   };
 
 
