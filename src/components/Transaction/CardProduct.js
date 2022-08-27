@@ -51,6 +51,7 @@ export default function CardProduct({
           category="circle"
           title={'-'}
           type={count === 0 ? 'secondary' : 'primary'}
+          disable={count === 0 ? true : false}
         />
 
         <View style={{marginHorizontal: scale(10)}}>

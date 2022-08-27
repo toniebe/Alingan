@@ -1,5 +1,5 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import CardAccount from '../../components/Transaction/CardAccount';
 import {CPrimary, CWhite} from '../../assets/styles/colors';
 import {scale} from '../../assets/helper/scaling';
@@ -11,8 +11,13 @@ import CardProduct from '../../components/Transaction/CardProduct';
 import getProduct from '../../api/getProduct';
 import Loading from '../../assets/components/Loading';
 import Button from '../../assets/components/Button';
+import {set} from 'react-native-reanimated';
+import {ReducerContext} from '../../store';
+import { useIsFocused } from '@react-navigation/native';
+import convertNumber from '../../assets/helper/convertNumber';
 
 export default function TransactionScreen({navigation}) {
+  const {store, dispatch} = useContext(ReducerContext);
   const [allData, setAllData] = useState({});
   const [product, setProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,6 +26,10 @@ export default function TransactionScreen({navigation}) {
   const [cart, setCart] = useState([]);
   const [search, setSearch] = useState('');
   const [tabCart, setTabCart] = useState(false);
+  const [totalProduct, setTotalProduct] = useState(0);
+  const [totalPrice,setTotalPrice] = useState(0);
+  const isFocus = useIsFocused();
+  // let totalPrice = 0;
 
   const getData = async () => {
     setIsLoading(true);
@@ -33,27 +42,59 @@ export default function TransactionScreen({navigation}) {
     }
   };
 
-  const getCartProduct = () => {
-    product.filter((item) => item.quantity !== 0).map((item,index) => (
-      setCart([...cart,item])
-    ))
-    console.log({cart})
-  }
-
-  const quantityHanlder = (action, index) => {
+  
+  const quantityPlusHanlder = index => {
     const newItems = [...product]; // clone the array
     let currentQty = newItems[index]['quantity'];
 
-    if (action == 'more') {
-      newItems[index]['quantity'] = currentQty + 1;
-    } else if (action == 'less') {
-      newItems[index]['quantity'] = currentQty > 0 ? currentQty - 1 : 0;
-    }
-
+    newItems[index]['quantity'] = currentQty + 1;
+    setTotalProduct(totalProduct + 1);
     setProduct(newItems);
-    // getCartProduct();
+    getCartProduct();
   };
 
+  const quantityMinusHanlder = index => {
+    const newItems = [...product]; // clone the array
+    let currentQty = newItems[index]['quantity'];
+    newItems[index]['quantity'] = currentQty > 0 ? currentQty - 1 : 0;
+    setTotalProduct(totalProduct > 0 ? totalProduct - 1 : 0);
+    setProduct(newItems);
+
+  };
+
+  const getTotalPrice = () => {
+    let arrProd = filterCart();
+    let result = 0
+    arrProd.map((item) => {
+      result = result + (item.quantity * item.price)
+    })
+    setTotalPrice(result)
+    console.log({totalPrice})
+  }
+
+  const getCartProduct = () => {
+    if(totalProduct > 0){
+      setTabCart(true)
+    }else {
+      setTabCart(false)
+    }
+  };
+
+  function getUniqueListBy(arr, key) {
+    return [...new Map(arr.map(item => [item[key], item])).values()]
+  }
+
+  const filterCart = () => {
+    const arr1 = getUniqueListBy(product,'productId')
+    console.log({arr1})
+    return arr1.filter((item) => item.quantity !== 0)
+    
+  }
+
+  const handleSubmit = () => {
+    let arrCart = filterCart()
+    console.log({arrCart})
+  }
 
   const searchFilter = text => {
     if (text) {
@@ -74,8 +115,16 @@ export default function TransactionScreen({navigation}) {
 
   useEffect(() => {
     getData();
-    // handleCart()
-  }, []);
+    if(isFocus){
+      setTotalProduct(0)
+    }
+  }, [isFocus]);
+
+  useEffect(() => {
+    getCartProduct();
+    getTotalPrice();
+  }, [totalProduct]);
+  
 
   return (
     <View style={styles.container}>
@@ -108,8 +157,8 @@ export default function TransactionScreen({navigation}) {
                     price={item.price}
                     unit={item.unit}
                     count={item.quantity}
-                    actionMinus={() => quantityHanlder('less', index)}
-                    actionPlus={() => quantityHanlder('more', index)}
+                    actionMinus={() => quantityMinusHanlder(index)}
+                    actionPlus={() => quantityPlusHanlder(index)}
                     // actionPlus={() => handlePlus(item)}
                   />
                 </View>
@@ -118,11 +167,11 @@ export default function TransactionScreen({navigation}) {
             {tabCart && (
               <View style={styles.cart}>
                 <View>
-                  <Text>Total 3 Produk</Text>
-                  <Text>Rp49.000</Text>
+                  <Text>Total {totalProduct} Produk</Text>
+                  <Text>{`Rp${totalPrice}`}</Text>
                 </View>
                 <View style={{width: '70%', alignItems: 'flex-end'}}>
-                  <Button size="short" title={'Bayar Sekarang'} />
+                  <Button size="short" title={'Bayar Sekarang'} onPress={() => handleSubmit()} />
                 </View>
               </View>
             )}
