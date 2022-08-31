@@ -13,8 +13,9 @@ import Loading from '../../assets/components/Loading';
 import Button from '../../assets/components/Button';
 import {set} from 'react-native-reanimated';
 import {ReducerContext} from '../../store';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 import convertNumber from '../../assets/helper/convertNumber';
+import CardCart from '../../components/Transaction/CardCart';
 
 export default function TransactionScreen({navigation}) {
   const {store, dispatch} = useContext(ReducerContext);
@@ -27,7 +28,7 @@ export default function TransactionScreen({navigation}) {
   const [search, setSearch] = useState('');
   const [tabCart, setTabCart] = useState(false);
   const [totalProduct, setTotalProduct] = useState(0);
-  const [totalPrice,setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
   const isFocus = useIsFocused();
   // let totalPrice = 0;
 
@@ -42,7 +43,6 @@ export default function TransactionScreen({navigation}) {
     }
   };
 
-  
   const quantityPlusHanlder = index => {
     const newItems = [...product]; // clone the array
     let currentQty = newItems[index]['quantity'];
@@ -59,42 +59,46 @@ export default function TransactionScreen({navigation}) {
     newItems[index]['quantity'] = currentQty > 0 ? currentQty - 1 : 0;
     setTotalProduct(totalProduct > 0 ? totalProduct - 1 : 0);
     setProduct(newItems);
-
   };
 
   const getTotalPrice = () => {
     let arrProd = filterCart();
-    let result = 0
-    arrProd.map((item) => {
-      result = result + (item.quantity * item.price)
-    })
-    setTotalPrice(result)
-    console.log({totalPrice})
-  }
+    let result = 0;
+    arrProd.map(item => {
+      result = result + item.quantity * item.price;
+    });
+    setTotalPrice(result);
+    console.log({totalPrice});
+  };
 
   const getCartProduct = () => {
-    if(totalProduct > 0){
-      setTabCart(true)
-    }else {
-      setTabCart(false)
+    if (totalProduct > 0) {
+      setTabCart(true);
+    } else {
+      setTabCart(false);
     }
   };
 
   function getUniqueListBy(arr, key) {
-    return [...new Map(arr.map(item => [item[key], item])).values()]
+    return [...new Map(arr.map(item => [item[key], item])).values()];
   }
 
   const filterCart = () => {
-    const arr1 = getUniqueListBy(product,'productId')
-    console.log({arr1})
-    return arr1.filter((item) => item.quantity !== 0)
-    
-  }
+    const arr1 = getUniqueListBy(product, 'productId');
+    // console.log({arr1})
+    return arr1.filter(item => item.quantity !== 0);
+  };
 
   const handleSubmit = () => {
-    let arrCart = filterCart()
-    console.log({arrCart})
-  }
+    let arrCart = filterCart();
+    const data = {
+      item: arrCart,
+      totalPrice: totalPrice,
+      totalProduct: totalProduct,
+    };
+    // console.log({data})
+    navigation.navigate('DetailPayment', {data: data});
+  };
 
   const searchFilter = text => {
     if (text) {
@@ -115,8 +119,8 @@ export default function TransactionScreen({navigation}) {
 
   useEffect(() => {
     getData();
-    if(isFocus){
-      setTotalProduct(0)
+    if (isFocus) {
+      setTotalProduct(0);
     }
   }, [isFocus]);
 
@@ -124,12 +128,11 @@ export default function TransactionScreen({navigation}) {
     getCartProduct();
     getTotalPrice();
   }, [totalProduct]);
-  
 
   return (
     <View style={styles.container}>
       {isLoading ? (
-        <Loading fullPage />
+        <Loading  fullPage />
       ) : (
         <>
           <View style={styles.topContainer}>
@@ -164,18 +167,17 @@ export default function TransactionScreen({navigation}) {
                 </View>
               ))}
             </ScrollView>
-            {tabCart && (
-              <View style={styles.cart}>
-                <View>
-                  <Text>Total {totalProduct} Produk</Text>
-                  <Text>{`Rp${totalPrice}`}</Text>
-                </View>
-                <View style={{width: '70%', alignItems: 'flex-end'}}>
-                  <Button size="short" title={'Bayar Sekarang'} onPress={() => handleSubmit()} />
-                </View>
-              </View>
-            )}
+            
           </View>
+          {tabCart && (
+              
+              <CardCart
+                totalPrice={totalPrice}
+                totalProduct={totalProduct}
+                titleBtn="bayar sekarang"
+                onPress={() => handleSubmit()}
+              />
+            )}
         </>
       )}
     </View>

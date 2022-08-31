@@ -9,6 +9,7 @@ export default function Loading({fullPage}) {
         source={require('../../animation/84041-load-orange-jundo.json')}
         autoPlay
         loop
+        resizeMode='center'
       />
     </View>
   ) : (

@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
 import React from 'react';
 import {scale} from '../../helper/scaling';
 import font from '../../styles/font';
@@ -10,6 +10,7 @@ import {
   colors,
   CPrimary,
   CTextLight,
+  CTextLight4,
 } from '../../styles/colors';
 
 export default function BStandartShort({

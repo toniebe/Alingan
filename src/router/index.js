@@ -14,7 +14,9 @@ export default function Router() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{
+        headerBackTitle:' '
+      }}>
         {Auth()}
         {Home()}
         {Transaction()}

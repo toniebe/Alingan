@@ -11,6 +11,7 @@ import {CGreey1, CGreey3, CGreey5, CSecondary} from '../../styles/colors';
 import {scale} from '../../helper/scaling';
 import iconEyeOff from '../../images/icon/Eye-off.png';
 import iconEye from '../../images/icon/Eye.png';
+import font from '../../styles/font';
 
 export default function TextInputs({
   icon,
@@ -21,6 +22,7 @@ export default function TextInputs({
   keyboardType = 'default',
   secureTextEntry = false,
   password = false,
+  textTitle = '',
 }) {
   const [borderColor, setBorderColor] = React.useState(CGreey1);
   const [borderIcon, setBorderIcon] = React.useState(CGreey5);
@@ -29,7 +31,13 @@ export default function TextInputs({
     <View
       style={[styles.container, {borderWidth: 1, borderColor: borderColor}]}>
       <View>
-        <Image source={icon} style={[styles.icon, {tintColor: borderIcon}]} />
+        {icon ? (
+          <Image source={icon} style={[styles.icon, {tintColor: borderIcon}]} />
+        ) : (
+          <Text style={[font.Poppins, {fontSize: scale(14), color: CGreey5}]}>
+            {textTitle}
+          </Text>
+        )}
       </View>
       <View style={[styles.texinputContainer]}>
         <TextInput
@@ -52,7 +60,10 @@ export default function TextInputs({
       </View>
       {password && (
         <TouchableOpacity onPress={() => setHide(!hide)}>
-          <Image source={hide ? iconEye : iconEyeOff} style={[styles.icon,{tintColor: borderIcon}]} />
+          <Image
+            source={hide ? iconEye : iconEyeOff}
+            style={[styles.icon, {tintColor: borderIcon}]}
+          />
         </TouchableOpacity>
       )}
     </View>
@@ -77,7 +88,7 @@ const styles = StyleSheet.create({
   textinput: {
     paddingHorizontal: scale(10),
     width: '100%',
-    height:scale(35)
+    height: scale(35),
     // backgroundColor: 'pink',
   },
   texinputContainer: {
