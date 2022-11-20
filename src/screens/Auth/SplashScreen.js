@@ -27,18 +27,22 @@ const SplashScreen = ({navigation}) => {
       navigation.replace('Dashboard')
     }
   }
-  useEffect( () => {
-    setTimeout(() => {
-      handleNavigation()
-    }, 5000);
-  }, []);
+  // useEffect( () => {
+  //   setTimeout(() => {
+  //     handleNavigation()
+  //   }, 5000);
+  // }, []);
 
   useEffect(() => {
     ActivateConfig(err => {
       if (err) {
         console.log({err})
       } else {
-        GetAllConfig(dispatch, () => {});
+        GetAllConfig(dispatch, () => {
+          if(!err){
+            handleNavigation();
+          }
+        });
         // GetConfig('onboarding')
       }
     });

@@ -130,7 +130,7 @@ export default function TransactionScreen({navigation}) {
   }, [totalProduct]);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={{flex:1,flexGrow:1}}>
       {isLoading ? (
         <Loading  fullPage />
       ) : (
@@ -180,7 +180,7 @@ export default function TransactionScreen({navigation}) {
             )}
         </>
       )}
-    </View>
+    </ScrollView>
   );
 }
 

@@ -6,6 +6,7 @@ import BottomTab from './BottomTab';
 import DetailTransactionScreen from '../screens/History/DetailTransactionScreen';
 import DetailPayment from '../screens/Transaction/DetailPayment';
 import PaymentScreen from '../screens/Transaction/PaymentScreen';
+import StructScreen from '../screens/Transaction/StructScreen';
 
 export default function Transaction() {
   const Stack = createNativeStackNavigator();
@@ -30,6 +31,13 @@ export default function Transaction() {
         component={PaymentScreen}
         options={{
             title:'Total Bayar'
+        }}
+      />
+      <Stack.Screen
+        name="Struct"
+        component={StructScreen}
+        options={{
+            title:'Struk Pembayaran'
         }}
       />
     </Stack.Group>

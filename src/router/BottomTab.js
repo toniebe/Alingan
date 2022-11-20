@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import TransactionScreen from '../screens/Home/TransactionScreen';
 import HistoryScreen from '../screens/Home/HistoryScreen';
@@ -9,12 +9,29 @@ import iconHistory from '../assets/images/icon/history-unactive.png';
 import iconAccount from '../assets/images/icon/akun-unactive.png';
 // import TopTab from './TopTabNav';
 import TopTabNav from './TopTabNav';
+import { Keyboard } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
+// const [keyboardStatus, setKeyboardStatus] = useState();
+// useEffect(() => {
+//   const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+//     setKeyboardStatus(true);
+//   });
+//   const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+//     setKeyboardStatus(false);
+//   });
+
+//   return () => {
+//     showSubscription.remove();
+//     hideSubscription.remove();
+//   };
+// }, []);
 const BottomTab = () => {
   return (
-    <Tab.Navigator tabBar={props => <MyTabBar {...props} />}>
+    <Tab.Navigator screenOptions={{
+      tabBarHideOnKeyboard: true
+    }} tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen
         name="Transaksi"
         component={TransactionScreen}

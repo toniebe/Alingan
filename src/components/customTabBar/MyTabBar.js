@@ -15,10 +15,11 @@ export default function MyTabBar({state, descriptors, navigation}) {
           width: 0,
           height: -3,
         },
+        marginTop:scale(2),
         shadowOpacity: 0.27,
         shadowRadius: 4.65,
 
-        elevation: 6,
+        elevation: 3,
       }}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];

@@ -1,5 +1,5 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import iconDollar from '../../assets/images/icon/money.png';
 import iconButton from '../../assets/images/icon/history-unactive.png';
 import {scale} from '../../assets/helper/scaling';
@@ -12,28 +12,27 @@ import convertNumber from '../../assets/helper/convertNumber';
 
 export default function PaymentScreen({navigation, route}) {
   const {newData} = route.params;
-  const [nominal,setNominal] = useState('')
-  const [moneyChanges,setMoneyChanges] = useState('-')
-  const [disable,setDisable] = useState(true)
-  
+  const [nominal, setNominal] = useState('');
+  const [moneyChanges, setMoneyChanges] = useState('-');
+  const [disable, setDisable] = useState(true);
 
-//   useEffect(() => {
-//     console.log({newData})
-//   }, [])
-  
+  //   useEffect(() => {
+  //     console.log({newData})
+  //   }, [])
+
   const handleOnchange = value => {
-    setNominal(value)
-    let nominalParse = parseInt(value)
-    let totalPrice = parseInt(newData.data.totalPrice)
-    let result = nominalParse - totalPrice
-    if(result >= 0){
-        setMoneyChanges(`Rp${convertNumber(result)}`)
-        setDisable(false)
-    }else{
-        setMoneyChanges('-')
-        setDisable(true)
+    setNominal(value);
+    let nominalParse = parseInt(value);
+    let totalPrice = parseInt(newData.data.totalPrice);
+    let result = nominalParse - totalPrice;
+    if (result >= 0) {
+      setMoneyChanges(`Rp${convertNumber(result)}`);
+      setDisable(false);
+    } else {
+      setMoneyChanges('-');
+      setDisable(true);
     }
-  }
+  };
 
   return (
     <View style={{flex: 1}}>
@@ -72,7 +71,13 @@ export default function PaymentScreen({navigation, route}) {
             ]}>
             Nominal Pembayaran
           </Text>
-          <TextInputs keyboardType='numeric' value={nominal} onChangeText={(value) => handleOnchange(value)} textTitle="Rp" placeholder="Masukan Nominal Pembayaran" />
+          <TextInputs
+            keyboardType="numeric"
+            value={nominal}
+            onChangeText={value => handleOnchange(value)}
+            textTitle="Rp"
+            placeholder="Masukan Nominal Pembayaran"
+          />
         </View>
         <View
           style={{
@@ -106,7 +111,18 @@ export default function PaymentScreen({navigation, route}) {
       </View>
       <View style={styles.botContent}>
         <View style={styles.buttonContainer}>
-          <Button title={'Buat Struk'} icon={iconButton} disable={disable} />
+          <Button
+            title={'Buat Struk'}
+            icon={iconButton}
+            disable={disable}
+            onPress={() =>
+              navigation.navigate('Struct', {
+                data: newData,
+                nominal: nominal,
+                moneyChanges: moneyChanges,
+              })
+            }
+          />
         </View>
       </View>
     </View>
@@ -125,10 +141,9 @@ const styles = StyleSheet.create({
     // backgroundColor: 'pink',
     justifyContent: 'flex-end',
   },
-  buttonContainer:{
-    paddingHorizontal:scale(20),
-    paddingVertical:scale(10),
-    backgroundColor:CWhite
-  }
-
+  buttonContainer: {
+    paddingHorizontal: scale(20),
+    paddingVertical: scale(10),
+    backgroundColor: CWhite,
+  },
 });
