@@ -1,4 +1,4 @@
-import {BASE_URL, BASE_URL_MOCK} from 'dotenv';
+import {BASE_URL, BASE_URL_MOCK,API_KEY} from 'dotenv';
 
 export default async function callAPI({
   url,
@@ -23,7 +23,7 @@ export default async function callAPI({
   } else {
     let headerUseCredential = {
       'Content-Type': contentType || 'application/json',
-      Authorization: accessToken,
+      Authorization: API_KEY,
       'Accept-Language': 'id',
       ...newHeaders,
       // 'Access-Control-Expose-Headers': 'Location'
@@ -31,6 +31,7 @@ export default async function callAPI({
     let headerUnuseCredential = {
       'Content-Type': contentType || 'application/json',
       'Accept-Language': 'id',
+      Authorization: API_KEY,
       ...newHeaders,
     };
     let headers = useCredential ? headerUseCredential : headerUnuseCredential;

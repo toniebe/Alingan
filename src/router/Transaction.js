@@ -16,28 +16,28 @@ export default function Transaction() {
         name="TransactionDetail"
         component={DetailTransactionScreen}
         options={{
-            title:'Detail Transaksi'
+          title: 'Detail Transaksi',
         }}
       />
       <Stack.Screen
         name="DetailPayment"
         component={DetailPayment}
         options={{
-            title:'Detail Pembayaran'
+          title: 'Detail Pembayaran',
         }}
       />
       <Stack.Screen
         name="Payment"
         component={PaymentScreen}
         options={{
-            title:'Total Bayar'
+          title: 'Total Bayar',
         }}
       />
       <Stack.Screen
         name="Struct"
         component={StructScreen}
         options={{
-            title:'Struk Pembayaran'
+          title: 'Struk Pembayaran',
         }}
       />
     </Stack.Group>

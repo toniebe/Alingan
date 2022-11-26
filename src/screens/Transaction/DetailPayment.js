@@ -28,15 +28,16 @@ export default function DetailPayment({navigation, route}) {
   const [detailTransaction, setDetailTransaction] = useState({});
   const [itemTransaction, setItemTransaction] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  // eslint-disable-next-line prettier/prettier
   const [date,setDate] = useState(new Date(Date.now()))
 
   const handleSubmit = () => {
     let newData = {
-        data,
-        date:date
-    }
-    navigation.navigate('Payment', {newData})
-  }
+      data,
+      date: date,
+    };
+    navigation.navigate('Payment', {newData});
+  };
   return (
     <View style={styles.container}>
       {isLoading ? (
@@ -56,7 +57,13 @@ export default function DetailPayment({navigation, route}) {
                 font.PoppinsRegular,
                 {color: CGreey3, fontSize: scale(10), fontWeight: '500'},
               ]}>
-              {formatDate({date_input:date,type:'short',sparator:' ',time:true,sparatorDateTime:' . '})}
+              {formatDate({
+                date_input: date,
+                type: 'short',
+                sparator: ' ',
+                time: true,
+                sparatorDateTime: ' . ',
+              })}
             </Text>
           </View>
           <View>

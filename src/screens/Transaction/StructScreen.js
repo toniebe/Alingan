@@ -1,4 +1,4 @@
-import {StyleSheet, Text, useWindowDimensions, View} from 'react-native';
+import {PermissionsAndroid, StyleSheet, Text, useWindowDimensions, View} from 'react-native';
 import React, {useEffect} from 'react';
 import HTML from 'react-native-render-html';
 import convertNumber from '../../assets/helper/convertNumber';
@@ -106,6 +106,30 @@ export default function StructScreen({navigation, route}) {
        
     </div>
 </body>`;
+
+const requestStoragePermission = async () => {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      {
+        title: "Akses Storage",
+        message:
+          "Kami akan mengakses storage anda untuk mendownload Struk", 
+        buttonNeutral: "Ask Me Later",
+        buttonNegative: "Cancel",
+        buttonPositive: "OK"
+      }
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log("You can use the camera");
+      printPDF();
+    } else {
+      console.log("Camera permission denied");
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+};
 
 const printPDF = async () => {
     const htmlString = await dynamicHTML;

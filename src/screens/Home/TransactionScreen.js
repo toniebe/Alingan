@@ -130,9 +130,11 @@ export default function TransactionScreen({navigation}) {
   }, [totalProduct]);
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={{flex:1,flexGrow:1}}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={{flex: 1, flexGrow: 1}}>
       {isLoading ? (
-        <Loading  fullPage />
+        <Loading fullPage />
       ) : (
         <>
           <View style={styles.topContainer}>
@@ -167,17 +169,15 @@ export default function TransactionScreen({navigation}) {
                 </View>
               ))}
             </ScrollView>
-            
           </View>
           {tabCart && (
-              
-              <CardCart
-                totalPrice={totalPrice}
-                totalProduct={totalProduct}
-                titleBtn="bayar sekarang"
-                onPress={() => handleSubmit()}
-              />
-            )}
+            <CardCart
+              totalPrice={totalPrice}
+              totalProduct={totalProduct}
+              titleBtn="bayar sekarang"
+              onPress={() => handleSubmit()}
+            />
+          )}
         </>
       )}
     </ScrollView>
