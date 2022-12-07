@@ -7,7 +7,7 @@ cache:
   directories:
     - node_modules
 before_install:
-- nvm install 16
+- nvm install 16.15.1
 - node --version
 install:
 - yarn install
@@ -23,7 +23,7 @@ android:
   # - extra-google-m2repository
   # - addon-google_apis-google-16
 script:
-- cd android && ./gradlew clean check
+- cd android && ./gradlew clean
 - cd ..
 - npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
 - cd android && ./gradlew assembleDebug
