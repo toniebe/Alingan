@@ -3,7 +3,7 @@ dist: xenial
 jdk:
   - openjdk11
 before_install:
- - yes | sdkmanager "platforms;android-28"
+- yes | sdkmanager "platforms;android-28"
 - nvm install 
 - node --version
 install:
