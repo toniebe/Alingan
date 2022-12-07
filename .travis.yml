@@ -1,10 +1,9 @@
 language: android
 dist: trusty
 jdk:
-  - openjdk14
+  - openjdk11
 before_install:
-- yes | sdkmanager "platforms;android-28"
-- nvm install 
+- nvm install 16
 - node --version
 install:
 - npm install
