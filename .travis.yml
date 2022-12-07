@@ -23,3 +23,6 @@ deploy:
   file: $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/app-debug.apk
   on:
     tags: true
+
+  after_deploy:
+  - rm -rf $TRAVIS_BUILD_DIR/android/app/build/outputs
