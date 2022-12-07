@@ -14,7 +14,7 @@ export default async function callAPI({
   statusCustom,
   locationHeader,
 }) {
-  console.log({url: BASE_URL, path: url});
+  // console.log({url: BASE_URL, path: url});
   let result = {};
   if (useCredential && !accessToken) {
     if (navigation) {
@@ -37,6 +37,7 @@ export default async function callAPI({
     let headers = useCredential ? headerUseCredential : headerUnuseCredential;
     try {
       let res = await fetch(`${BASE_URL}${url}`, {
+      // let res = await fetch(`https://run.mocky.io/v3${url}`, {
         method,
         headers,
         body: data && JSON.stringify(data),

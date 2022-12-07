@@ -44,21 +44,22 @@ export default function TransactionScreen({navigation}) {
   };
 
   const quantityPlusHanlder = index => {
-    const newItems = [...product]; // clone the array
+    const newItems = [...filterData]; // clone the array
     let currentQty = newItems[index]['quantity'];
 
     newItems[index]['quantity'] = currentQty + 1;
     setTotalProduct(totalProduct + 1);
-    setProduct(newItems);
+    setFilterData(newItems);
+    console.log({product});
     getCartProduct();
   };
 
   const quantityMinusHanlder = index => {
-    const newItems = [...product]; // clone the array
+    const newItems = [...filterData]; // clone the array
     let currentQty = newItems[index]['quantity'];
     newItems[index]['quantity'] = currentQty > 0 ? currentQty - 1 : 0;
     setTotalProduct(totalProduct > 0 ? totalProduct - 1 : 0);
-    setProduct(newItems);
+    setFilterData(newItems);
   };
 
   const getTotalPrice = () => {

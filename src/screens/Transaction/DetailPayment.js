@@ -29,7 +29,7 @@ export default function DetailPayment({navigation, route}) {
   const [itemTransaction, setItemTransaction] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   // eslint-disable-next-line prettier/prettier
-  const [date,setDate] = useState(new Date(Date.now()))
+  const date = new Date()+7
 
   const handleSubmit = () => {
     let newData = {

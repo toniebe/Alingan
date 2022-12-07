@@ -43,12 +43,14 @@ export default function StoreScreen({navigation}) {
         <ScrollView style={styles.cardContainer}>
           {transaction.map((item, index) => (
             <TouchableOpacity
+              key={index}
               onPress={() =>
                 navigation.navigate('TransactionDetail', {
                   id: item.transactionId,
                 })
               }>
               <CardTransaction
+                key={index + '12'}
                 number={item.transactionTotal}
                 idTransaksi={moment(item.transactionDate, 'YYYY/MM/DD').format(
                   'YYYY-MM-DD',
