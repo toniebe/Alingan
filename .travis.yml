@@ -1,6 +1,5 @@
 language: android
-dist: xenial
-sudo: required
+# dist: xenial
 jdk:
   - openjdk11
 before_install:
