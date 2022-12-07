@@ -3,7 +3,7 @@ language: android
 jdk:
   - openjdk11
 before_install:
-- nvm install
+- nvm install 18.12.1
 - node --version
 install:
 - npm install
