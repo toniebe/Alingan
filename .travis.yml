@@ -1,5 +1,8 @@
 language: android
-jdk: oraclejdk8
+dist: xenial
+sudo: required
+jdk:
+  - openjdk11
 before_install:
 - nvm install 16
 - node --version
