@@ -1,22 +1,14 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import Lottie from 'lottie-react-native';
 
 export default function Loading({fullPage}) {
   return fullPage ? (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Lottie
-        source={require('../../animation/84041-load-orange-jundo.json')}
-        autoPlay
-        loop
-        resizeMode='center'
+      <ActivityIndicator color={"#D2512C"} size="large"
       />
     </View>
   ) : (
-    <Lottie
-      source={require('../../animation/84041-load-orange-jundo.json')}
-      autoPlay
-      loop
+    <ActivityIndicator color={"#D2512C"} size="large"
     />
   );
 }
