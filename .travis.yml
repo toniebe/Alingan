@@ -1,9 +1,9 @@
 language: android
-# dist: xenial
+dist: trusty
 jdk:
   - openjdk11
 before_install:
-- nvm install 18
+- nvm install 16
 - node --version
 install:
 - npm install
