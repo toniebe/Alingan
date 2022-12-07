@@ -9,12 +9,12 @@ install:
 - npm install
 android:
   components:
-  - build-tools-23.0.1
-  - android-23
-  - extra-android-m2repository
+  - build-tools-31.0.0
+  - android-21
+  # - extra-android-m2repository
   # - extra-google-google_play_services
   # - extra-google-m2repository
-  - addon-google_apis-google-16
+  # - addon-google_apis-google-16
 script:
 - npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
 - cd android && ./gradlew assembleDebug
