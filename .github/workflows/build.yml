@@ -42,9 +42,9 @@ jobs:
       - name: create index bundle
         run: |
           npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
-      - name: Build Android Release
+      - name: Build Android Debug
         run: |
-          cd android && ./gradlew assembleRelease
+          cd android && ./gradlew assembleDebug
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
