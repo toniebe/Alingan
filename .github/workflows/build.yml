@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: 16 
       - name: install npm dependencies and build bundle
-        uses: actions/checkout@v3
+        # uses:  actions/checkout@v3
         uses: FirebaseExtended/action-hosting-deploy@v0
         run: |  
           npm install 
