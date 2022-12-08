@@ -39,17 +39,17 @@ jobs:
         with:
           node-version: 16 
       - name: install npm dependencies and build bundle
-        # uses:  actions/checkout@v3
-        uses: FirebaseExtended/action-hosting-deploy@v0
         run: |  
           npm install 
           npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res 
-          cd android && ./gradlew assembleDebug
+      - uses: actions/checkout@v3
+      - run: cd android && ./gradlew assembleDebug
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ALINGAN_A4792 }}'
           channelId: live
-          projectId: alingan-a4792        
+          projectId: alingan-a4792      
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
