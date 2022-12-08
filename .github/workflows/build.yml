@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Node 16
-        uses: actions/checkout@v2
-        uses: actions/setup-node@v2
+        uses: actions/checkout@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 16
       - name: install npm dependencies
@@ -26,10 +26,17 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Set up Node 16
-        uses: actions/checkout@v2
-        uses: actions/setup-node@v2
+        uses: actions/checkout@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 16
+      - name: setup firebase config
+        uses: FirebaseExtended/action-hosting-deploy@v0  
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ALINGAN_A4792 }}'
+          channelId: live
+          projectId: alingan-a4792
       - name: install npm dependencies
         run: |
           npm install
@@ -42,17 +49,7 @@ jobs:
       - name: create index bundle
         run: |
           npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
-      # - name: Build Android Debug
-      #   run: |
-      #     cd android && ./gradlew assembleDebug
       - name: Build Android Debug
-        # uses: actions/checkout@v3
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ALINGAN_A4792 }}'
-          channelId: live
-          projectId: alingan-a4792
         run: | 
          cd android && ./gradlew assembleDebug
       - name: Upload Artifact
@@ -60,14 +57,5 @@ jobs:
         with:
           name: alingan-debug.apk
           path: android/app/build/outputs/apk/debug/
-      # - name: Build Android Debug
-      #   uses: actions/checkout@v3
-      #   uses: FirebaseExtended/action-hosting-deploy@v0
-      #   with:
-      #     repoToken: '${{ secrets.GITHUB_TOKEN }}'
-      #     firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ALINGAN_A4792 }}'
-      #     channelId: live
-      #     projectId: alingan-a4792
-      #   run: | 
-      #    cd android && ./gradlew assembleDebug
+ 
         
