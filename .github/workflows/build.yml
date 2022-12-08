@@ -7,11 +7,12 @@ jobs:
   install-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Set up Node 16
+        uses: actions/checkout@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Install npm dependencies
+      - name: install npm dependencies
         run: |
           npm install
       - name: Set up JDK 11
@@ -24,11 +25,12 @@ jobs:
     needs: install-and-test
     runs-on: ubuntu-latest
     steps: 
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Set up Node 16
+        uses: actions/checkout@v3
+        uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Install npm dependencies
+      - name: install npm dependencies
         run: |
           npm install
       - name: Set up JDK 11
