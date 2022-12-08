@@ -58,6 +58,6 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ALINGAN_A4792 }}'
           channelId: live
           projectId: alingan-a4792
-         run: | 
+        run: | 
          cd android && ./gradlew assembleDebug
         
