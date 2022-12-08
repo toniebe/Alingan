@@ -54,16 +54,17 @@ jobs:
       - name: create index bundle
         run: |
           npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
-      - name: Build Android Debug
-        uses: actions/checkout@v3
+      - name: firebase action deploy
         uses: FirebaseExtended/action-hosting-deploy@v0
-        run: |
-          cd android && ./gradlew assembleDebug
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ALINGAN_A4792 }}'
           channelId: live
-          projectId: alingan-a4792     
+          projectId: alingan-a4792    
+      - name: Build Android Debug
+        uses: actions/checkout@v3
+        run: |
+          cd android && ./gradlew assembleDebug
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
