@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View,Image} from 'react-native';
 import React from 'react';
 import {scale} from '../../helper/scaling';
 import font from '../../styles/font';
@@ -10,9 +10,18 @@ import {
   colors,
   CPrimary,
   CTextLight,
+  CTextLight4,
 } from '../../styles/colors';
 
-const BStandartLong = ({disable, onPress, icon, type, title, style}) => {
+const BStandartLong = ({
+  disable,
+  onPress,
+  icon,
+  type,
+  title,
+  style,
+  textStyle,
+}) => {
   return disable ? (
     <View
       style={[
@@ -33,6 +42,7 @@ const BStandartLong = ({disable, onPress, icon, type, title, style}) => {
           font.PoppinsRegular,
           colors.TextLight4,
           {textAlign: 'center', fontWeight: '600'},
+          textStyle
         ]}>
         {title}
       </Text>
@@ -58,6 +68,7 @@ const BStandartLong = ({disable, onPress, icon, type, title, style}) => {
           colors.TextLight1,
           font.PoppinsRegular,
           {textAlign: 'center', fontWeight: '600'},
+          textStyle
         ]}>
         {title}
       </Text>
@@ -88,6 +99,7 @@ const BStandartLong = ({disable, onPress, icon, type, title, style}) => {
             colors.Primary,
             font.PoppinsRegular,
             {textAlign: 'center', fontWeight: '600'},
+            textStyle,
           ]}>
           {title}
         </Text>

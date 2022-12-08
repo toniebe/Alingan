@@ -29,7 +29,7 @@ const Auth = () => {
         name="Login"
         component={LoginScreen}
         options={{
-          headerShown: false,
+         title:''
         }}
       />
     </Stack.Group>

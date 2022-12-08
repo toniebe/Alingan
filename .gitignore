@@ -61,6 +61,10 @@ buck-out/
 /vendor/bundle/
 
 
+# debug application
+index.android.bundle
+drawable-*
+
 # enviroment
 .env
 
