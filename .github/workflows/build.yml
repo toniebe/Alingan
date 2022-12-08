@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Node 16
-        uses: actions/checkout@v3
-        uses: actions/setup-node@v3
+        uses: actions/checkout@v2
+        uses: actions/setup-node@v2
         with:
           node-version: 16
       - name: install npm dependencies
@@ -26,8 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Set up Node 16
-        uses: actions/checkout@v3
-        uses: actions/setup-node@v3
+        uses: actions/checkout@v2
+        uses: actions/setup-node@v2
         with:
           node-version: 16
       - name: install npm dependencies
@@ -46,7 +46,7 @@ jobs:
       #   run: |
       #     cd android && ./gradlew assembleDebug
       - name: Build Android Debug
-        uses: actions/checkout@v3
+        # uses: actions/checkout@v3
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
