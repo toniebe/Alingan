@@ -62,7 +62,7 @@ jobs:
       - name: Releasing using Hub
         uses: kyze8439690/action-release-debugapk@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUN_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
           APP_FOLDER: android/app/build/outputs/apk/debug/
  
         
