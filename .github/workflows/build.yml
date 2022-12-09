@@ -54,8 +54,9 @@ jobs:
           DATA: ${{ secrets.DEVELOPMENT_ENV }}
           run: echo $DATA > /home/runner/work/Alingan/Alingan/.env
       - name: build bundle
-        run: npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res 
-      - run: cd android && ./gradlew assembleDebug
+        run: npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+      - name: build apk debug
+        run: cd android && ./gradlew assembleDebug
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
