@@ -46,11 +46,11 @@ jobs:
       - name: Putting data google service json
         env:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
-        run: echo $DATA > /home/runner/work/Alingan/Alingan/android/app/google-services.json
+          run: echo $DATA > /home/runner/work/Alingan/Alingan/android/app/google-services.json
       - name: Putting data google service json
         env:
           DATA: ${{ secrets.DEVELOPMENT_ENV }}
-        run: echo $DATA > /home/runner/work/Alingan/Alingan/.env
+          run: echo $DATA > /home/runner/work/Alingan/Alingan/.env
       - name: build bundle
         run: npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res 
       - run: cd android && ./gradlew assembleDebug
@@ -59,5 +59,10 @@ jobs:
         with:
           name: app-debug.apk
           path: android/app/build/outputs/apk/debug/
+      - name: Releasing using Hub
+        uses: kyze8439690/action-release-debugapk@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUN_TOKEN }}
+          APP_FOLDER: android/app/build/outputs/apk/debug/
  
         
