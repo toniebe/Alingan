@@ -1,3 +1,4 @@
+
 name: react-native-android-build-apk
 on:
   push:
@@ -44,30 +45,18 @@ jobs:
           java-version: '11'
           cache: 'gradle'
       - name: Putting data google service json
-        uses: actions/checkout@v3
         env:
           DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
-          run: echo $DATA > /home/runner/work/Alingan/Alingan/android/app/google-services.json
-      - name: Putting data .env
-        uses: actions/checkout@v3
+        run: echo $DATA > /home/runner/work/Alingan/Alingan/android/app/google-services.json
+      - name: Putting data google service json
         env:
           DATA: ${{ secrets.DEVELOPMENT_ENV }}
-          run: echo $DATA > /home/runner/work/Alingan/Alingan/.env
+        run: echo $DATA > /home/runner/work/Alingan/Alingan/.env
       - name: build bundle
-        run: npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
-      - name: build apk debug
-        run: cd android && ./gradlew assembleDebug
+        run: npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res 
+      - run: cd android && ./gradlew assembleDebug
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v1
         with:
           name: app-debug.apk
           path: android/app/build/outputs/apk/debug/
-      # GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      # APP_FOLDER: android/app/build/outputs/apk/debug/
-      # - name: Releasing using Hub
-      # - uses: actions/action-release-debugapk@main
-      #   env:
-          
-          
- 
-        
