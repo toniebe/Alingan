@@ -59,10 +59,12 @@ jobs:
         with:
           name: app-debug.apk
           path: android/app/build/outputs/apk/debug/
-      # - name: Releasing using Hub
-      - uses: actions/action-release-debugapk@main
-        env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           APP_FOLDER: android/app/build/outputs/apk/debug/
+      # - name: Releasing using Hub
+      # - uses: actions/action-release-debugapk@main
+      #   env:
+          
+          
  
         
